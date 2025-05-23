@@ -2,6 +2,8 @@
 
 這是一個使用 FastAPI (後端) 和原生 HTML/CSS/JavaScript (前端) 開發的 Web 應用程式原型。它允許使用者上傳 PDF 格式的教材，輸入生成試卷的要求，然後利用大型語言模型 (LLM) 根據 PDF 內容和使用者指令自動生成試卷題目。應用程式支援流式輸出，即時顯示 LLM 的思考過程和生成的試卷內容，並提供將試卷匯出為 HTML 的功能。
 
+![image](https://github.com/user-attachments/assets/3ecaa3ea-6aad-4413-93b7-6e62a6b795a0)
+
 ## 主要功能
 
 *   **PDF 上傳與處理**:
