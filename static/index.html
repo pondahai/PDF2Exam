@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF 試卷生成器 (原型)</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.10/purify.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h1>PDF 試卷生成器</h1>
+            <div class="control-group">
+                <label for="pdfFile">1. 選擇 PDF 課本:</label>
+                <input type="file" id="pdfFile" accept=".pdf">
+            </div>
+            <div class="control-group">
+                <label for="userQuery">2. 輸入試卷生成指令 (留空使用預設):</label>
+                <textarea id="userQuery" rows="6" placeholder="例如：請針對課本內容，出5題關於[某個主題]的選擇題，並附上答案。"></textarea>
+            </div>
+            <button id="generateBtn">生成試卷</button>
+            <div id="statusArea">狀態：等待操作...</div>
+        </div>
+        <div class="right-panel">
+            <!-- 新增思考過程區域 -->
+            <details class="collapsible-think-area" id="thinkAreaContainer">
+                <summary>顯示/隱藏 LLM 思考過程</summary>
+                <div id="thinkOutput" class="think-output-content markdown-body">
+                    <p><em>LLM 思考過程將顯示於此...</em></p>
+                </div>
+            </details>
+            <!-- 試卷預覽區域 -->
+            <h2>試卷預覽</h2>
+            <div class="export-controls">
+                <button id="exportHtmlBtn" disabled>匯出為HTML (可列印)</button>
+            </div>
+            <div id="examOutput" class="markdown-body">
+                <p>點擊 "生成試卷" 開始...</p>
+            </div>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

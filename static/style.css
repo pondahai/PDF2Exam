@@ -1,0 +1,274 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 20px;
+}
+
+.left-panel, .right-panel {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* 改為 auto，讓內容決定是否滾動 */
+    display: flex; /* 添加 flex 以便內部元素可以控制大小 */
+    flex-direction: column; /* 縱向排列 */
+}
+
+.left-panel {
+    width: 35%;
+    /* flex-grow: 0; flex-shrink: 0; -- 固定寬度 */
+}
+
+.right-panel {
+    width: 65%;
+    /* flex-grow: 1; -- 佔據剩餘寬度 */
+}
+
+
+h1 {
+    font-size: 1.8em;
+    color: #1a73e8;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+h2 { /* 試卷預覽標題 */
+    font-size: 1.5em;
+    color: #3c4043;
+    margin-top: 20px; /* 與思考區塊間隔 */
+    margin-bottom: 15px;
+    flex-shrink: 0; /* 標題不縮小 */
+}
+
+.control-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #5f6368;
+}
+
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 0.95em;
+}
+
+input[type="file"] {
+    padding: 8px;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+button#generateBtn {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button#generateBtn:hover {
+    background-color: #1765cc;
+}
+
+button#generateBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+
+#statusArea {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #e8f0fe;
+    border: 1px solid #d2e3fc;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #3c4043;
+    flex-shrink: 0; /* 狀態區不縮小 */
+}
+
+/* 思考過程區域樣式 */
+.collapsible-think-area {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    flex-shrink: 0; /* 思考區塊整體不縮小，但內部內容可滾動 */
+}
+
+.collapsible-think-area summary {
+    padding: 10px 15px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #efefef;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 6px 6px 0 0;
+    list-style: revert; /* 顯示原生箭頭 */
+}
+.collapsible-think-area[open] summary {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.think-output-content {
+    padding: 15px;
+    max-height: 300px; /* 限制最大高度，超出則滾動 */
+    overflow-y: auto;
+    background-color: #ffffff; /* 思考內容區背景色 */
+    border-radius: 0 0 6px 6px;
+    font-size: 0.9em; /* 思考內容字體稍小 */
+    color: #444; /* 思考內容字體顏色 */
+}
+.think-output-content p:first-child {
+    margin-top: 0;
+}
+
+
+#examOutput {
+    /* flex-grow: 1; -- 讓它填滿剩餘空間 */
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    font-size: 0.95em;
+    min-height: 200px; /* 確保有個最小高度 */
+    display: flex; /* Forcing it to be a flex item if its parent is flex */
+    flex-direction: column; /* Its children will stack vertically */
+    flex-grow: 1; /* This will make it take up remaining space */
+}
+
+
+/* 通用 Markdown 樣式 (也適用於思考過程) */
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+    font-weight: 600;
+}
+.markdown-body h1 { font-size: 1.6em; }
+.markdown-body h2 { font-size: 1.4em; }
+.markdown-body h3 { font-size: 1.2em; }
+.markdown-body p { margin-bottom: 0.8em; }
+.markdown-body ul, .markdown-body ol { margin-bottom: 0.8em; padding-left: 2em; }
+.markdown-body li { margin-bottom: 0.3em; }
+.markdown-body pre {
+    background-color: #f0f0f0; /* Code block background */
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1em;
+    border: 1px solid #ddd; /* Add border to code blocks */
+}
+.markdown-body code { /* Inline code */
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #e8e8e8; /* Slightly different for inline code */
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+.markdown-body pre code { /* Code inside pre, reset some styles */
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    font-size: 1em; /* Reset to pre's font size */
+}
+.markdown-body blockquote {
+    border-left: 3px solid #ccc;
+    padding-left: 1em;
+    margin-left: 0;
+    color: #555;
+}
+.markdown-body table {
+    border-collapse: collapse;
+    width: auto;
+    margin-bottom: 1em;
+}
+.markdown-body th, .markdown-body td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+.markdown-body th {
+    background-color: #f2f2f2;
+}
+
+.stream-preview {
+    border: 1px dashed #ccc; /* 給臨時預覽區一個不同的邊框以便區分 */
+    padding: 15px;
+    white-space: pre-wrap; /* 保持換行和空格，類似 <pre> */
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; /* 使用等寬字體 */
+    font-size: 0.9em;
+    line-height: 1.5;
+    max-height: 400px; /* 也可以給臨時區一個最大高度 */
+    overflow-y: auto;
+    background-color: #fdfdfd;
+}
+
+.export-controls {
+    margin-bottom: 10px; 
+    text-align: right; 
+}
+
+#exportHtmlBtn {
+    background-color: #28a745; 
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#exportHtmlBtn:hover:not(:disabled) {
+    background-color: #218838;
+}
+
+#exportHtmlBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* 如果你還沒有為 .stream-preview 添加樣式，也一併加入 */
+.stream-preview {
+    border: 1px dashed #ccc;
+    padding: 15px;
+    white-space: pre-wrap;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #fdfdfd;
+    margin-bottom: 10px;
+}
